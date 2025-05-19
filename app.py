@@ -5,6 +5,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, IntegerField, FloatField
 from wtforms.validators import DataRequired, Length, EqualTo
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
+
 
 # --- Konfiguracja aplikacji ---
 app = Flask(__name__)
@@ -262,4 +264,5 @@ def init_db():
 if __name__ == '__main__':
     with app.app_context():
         init_db()
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
